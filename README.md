@@ -145,11 +145,30 @@ git push -u origin main
 ```
 
 Replace the URL with your own repository URL. The Build and test workflow runs on
-pushes and pull requests on macOS and Windows. Desktop builds can be dispatched
-manually or triggered with a `v*` tag; installers are uploaded as workflow artifacts,
+pushes and pull requests on macOS and Windows. Desktop builds run on pushes to `main` or `master`, can be dispatched
+manually, or triggered with a `v*` tag; installers are uploaded as workflow artifacts,
 not automatically published as a GitHub Release. Signing credentials are not included.
 
 No open-source license has been selected for the application code. Third-party
 content retains its own rights: see `public/FONT-NOTICES.txt` for SHK Aida and the
 font packages for their licenses. Keep image attribution alongside the photos when
 required. The supplied Bible source is retained as provided.
+
+## Download installers from GitHub Actions
+
+Push this project to GitHub, then open **Actions → Desktop builds**. A push to
+`main` or `master` starts packaging automatically. You can also select **Run workflow**
+on the default branch or push a version tag such as `v1.4.0`.
+
+Each successful run provides three downloads in its **Artifacts** section:
+
+| Artifact | Contents |
+| --- | --- |
+| Scripture-Projector-macOS-Apple-Silicon | ARM64 `.dmg` installer and `.zip` containing the Mac app |
+| Scripture-Projector-macOS-Intel | x64 `.dmg` installer and `.zip` containing the Mac app |
+| Scripture-Projector-Windows-x64 | NSIS setup `.exe` and portable `.exe` |
+
+Download and extract the artifact archive to get the installers. Artifacts are
+retained for 30 days. These builds are unsigned and not notarized, so macOS and
+Windows may show security prompts. The workflow does not require signing secrets
+and does not create a public GitHub Release.
