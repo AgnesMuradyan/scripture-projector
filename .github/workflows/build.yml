@@ -2,34 +2,56 @@ name: Desktop builds
 on:
   workflow_dispatch:
   push:
+    branches: [main, master]
     tags: ['v*']
 permissions:
   contents: read
+concurrency:
+  group: desktop-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
-    timeout-minutes: 30
+    name: Package ${{ matrix.name }}
+    timeout-minutes: 40
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest]
+        include:
+          - name: macOS-Apple-Silicon
+            os: macos-latest
+            args: --mac --arm64
+          - name: macOS-Intel
+            os: macos-latest
+            args: --mac --x64
+          - name: Windows-x64
+            os: windows-latest
+            args: --win --x64
     runs-on: ${{ matrix.os }}
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
-      - if: runner.os == 'macOS'
-        run: npm run package:mac -- --publish never
-        env:
-          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-      - if: runner.os == 'Windows'
-        run: npm run package:win -- --publish never
-      - uses: actions/upload-artifact@v4
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Build application
+        run: npm run build
+      - name: Run tests
+        run: npm test
+      - name: Package installers
+        run: npx --no-install electron-builder ${{ matrix.args }} --publish never
+      - name: Upload downloadable installers
+        uses: actions/upload-artifact@v4
         with:
-          name: Scripture-Projector-${{ runner.os }}
+          name: Scripture-Projector-${{ matrix.name }}
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
           path: |
             release/*.dmg
             release/*.zip
