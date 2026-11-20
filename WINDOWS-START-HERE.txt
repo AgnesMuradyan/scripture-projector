@@ -1,0 +1,24 @@
+WINDOWS — START HERE
+
+1. Extract this entire ZIP to a folder on your Windows computer.
+2. Install Node.js 22.12 or newer (https://nodejs.org).
+3. Open the extracted projector folder in File Explorer. Click the address bar,
+   type powershell and press Enter.
+4. Run these commands one at a time:
+
+   npm.cmd ci
+   npm.cmd run package:win -- --x64
+
+5. Open the release folder and run Scripture Projector Setup 1.4.0.exe.
+   This builds for standard 64-bit Intel/AMD Windows computers.
+6. Connect your projector. Press Windows + P and choose Extend.
+7. In the app Settings select the presentation screen, Default photo (Escape),
+   and Verse background (Enter).
+
+Internet is required for dependency installation and building. The installed
+application and bundled Armenian Bible work offline. Your own photos must be
+selected on Windows; personal Mac settings are not included in this archive.
+
+This is the complete source project, not a prebuilt Windows installer.
+Windows packaging is configured but has not been tested on Windows here.
+See README.md and VALIDATION.md for more information.

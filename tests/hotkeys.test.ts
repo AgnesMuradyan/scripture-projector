@@ -1,0 +1,6 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {hotkeyAction} from '../src/hotkeys';
+const event=(code:string,key=code)=>({code,key,ctrlKey:false,metaKey:false,shiftKey:false,altKey:false,repeat:false,isComposing:false});
+test('hotkeys work on physical keys even with Armenian layout',()=>{assert.equal(hotkeyAction(event('KeyB','բ'),false),'blackout');assert.equal(hotkeyAction(event('KeyH','հ'),false),'history');assert.equal(hotkeyAction(event('KeyQ','ք'),false),'queue-add');assert.equal(hotkeyAction(event('ArrowDown'),false),'verse-next');assert.equal(hotkeyAction(event('BracketRight',']'),false),'chapter-next');});
+test('typing, modifier shortcuts, auto-repeat and composition do not trigger live actions',()=>{for(const code of ['Enter','ArrowRight','KeyB','KeyG','KeyQ','KeyH']){assert.equal(hotkeyAction(event(code),true),null);assert.equal(hotkeyAction({...event(code),ctrlKey:true},false),null);assert.equal(hotkeyAction({...event(code),isComposing:true},false),null);assert.equal(hotkeyAction({...event(code),repeat:true},false),null);}assert.equal(hotkeyAction(event('Escape'),true),'escape');assert.equal(hotkeyAction({...event('Slash','?'),shiftKey:true},false),'help');});

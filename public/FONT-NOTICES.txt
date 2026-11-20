@@ -1,0 +1,10 @@
+SHK Aida — Syuzi Hakobyan, Yerevan
+Copyright (c) 2015 by Syuzi Hakobyan, Yerevan. All rights reserved.
+SHK Aida is a trademark of Syuzi Hakobyan, Yerevan.
+
+Unmodified Regular and Semi Bold font files bundled with Scripture Projector.
+Source and usage terms: https://fonter.am/en/fonts/shk-aida
+The source lists free personal and commercial use, including apps, and allows
+redistribution with the author's name retained. Do not sell the font itself,
+rename it, claim authorship, or pass modified files off as the original.
+Author-specified terms take precedence. Source checked 2026-11-20.

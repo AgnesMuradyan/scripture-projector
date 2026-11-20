@@ -1,0 +1,18 @@
+{
+  "version": "Միաբանություն",
+  "books": 66,
+  "chapters": 1189,
+  "verses": 31090,
+  "issues": [
+    "Book25.html repeats the heading Երեմիա from Book24.html. Catalog label Ողբ Երեմիայի distinguishes its five-chapter lament; source heading and all verse text are preserved.",
+    "Book11.html: Missing verse in chapter 1: 18.",
+    "Book13.html: Missing verse in chapter 1: 2.",
+    "Book18.html: Missing verse in chapter 6: 2.",
+    "Book18.html: Missing verse in chapter 9: 2.",
+    "Book18.html: Missing verse in chapter 36: 2.",
+    "Book19.html: Missing verse in chapter 104: 3.",
+    "Book22.html: Missing verse in chapter 1: 2.",
+    "Book40.html: Missing verse in chapter 7: 2.",
+    "Book43.html: Missing verse in chapter 8: 2."
+  ]
+}

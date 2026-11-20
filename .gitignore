@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Builds, installers, and generated verification output
+dist/
+dist-electron/
+release/
+artifacts/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+
+# Logs and caches
+*.log
+.vite/
+.cache/
+.npm/
+
+# OS and editor files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+*.mobileprovision
+
+# Local application data and temporary files
+library.json
+library.json.tmp
+library-before-bundled.json
+*.tmp
