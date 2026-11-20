@@ -19,10 +19,10 @@ jobs:
         include:
           - name: macOS-Apple-Silicon
             os: macos-latest
-            args: --mac --arm64
+            args: --mac --arm64 --config.mac.identity=- --config.mac.hardenedRuntime=false
           - name: macOS-Intel
             os: macos-latest
-            args: --mac --x64
+            args: --mac --x64 --config.mac.identity=- --config.mac.hardenedRuntime=false
           - name: Windows-x64
             os: windows-latest
             args: --win --x64
@@ -45,6 +45,9 @@ jobs:
         run: npm test
       - name: Package installers
         run: npx --no-install electron-builder ${{ matrix.args }} --publish never
+      - name: Verify macOS signature
+        if: runner.os == 'macOS'
+        run: codesign --verify --deep --strict --verbose=2 release/mac*/"Scripture Projector.app"
       - name: Upload downloadable installers
         uses: actions/upload-artifact@v4
         with:
